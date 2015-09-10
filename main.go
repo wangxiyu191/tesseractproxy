@@ -22,12 +22,12 @@ func (this *MainController) Post() {
 	filePath := imagePath + fileName //无扩展名的文件路径
 	//log.Println(filePath)
 
-	err := this.SaveToFile("image", filePath+".gif")
+	err := this.SaveToFile("image", filePath)
 	if err != nil {
 		log.Println(err)
 	}
 
-	cmd := exec.Command("convert", filePath+".gif", filePath+".jpg")
+	cmd := exec.Command("gm", "convert", filePath, filePath+".jpg")
 	cmd.Run()
 	if err != nil {
 		log.Println(err)
