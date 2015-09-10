@@ -6,6 +6,7 @@ import (
 	"log"
 	"os/exec"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -34,7 +35,8 @@ func (this *MainController) Post() {
 	}
 
 	out := gosseract.Must(gosseract.Params{Src: filePath + ".jpg"})
-	this.Data["json"] = map[string]string{"Result": out[0:4], "Id": fileName}
+	out = strings.Replace(out, "/n", "", -1)
+	this.Data["json"] = map[string]string{"Result": out, "Id": fileName}
 	this.ServeJson()
 }
 
