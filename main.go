@@ -35,7 +35,9 @@ func (this *MainController) Post() {
 	}
 
 	out := gosseract.Must(gosseract.Params{Src: filePath + ".jpg"})
-	out = strings.Replace(out, "/n", "", -1)
+	out = strings.Replace(out, "\n", "", -1)
+	out = strings.Replace(out, "\r", "", -1)
+	out = strings.Replace(out, " ", "", -1)
 	this.Data["json"] = map[string]string{"Result": out, "Id": fileName}
 	this.ServeJson()
 }
