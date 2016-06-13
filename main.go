@@ -39,12 +39,12 @@ func (this *MainController) Post() {
 	out = strings.Replace(out, "\r", "", -1)
 	out = strings.Replace(out, " ", "", -1)
 	this.Data["json"] = map[string]string{"Result": out, "Id": fileName}
-	this.ServeJson()
+	this.ServeJSON()
 }
 
 func main() {
-	//beego.EnableAdmin = true
-	//beego.AdminHttpPort = 3001
+	//beego.BConfig.Listen.EnableAdmin = true
+	//beego.BConfig.Listen.AdminPort = 3001
 	beego.SetLogger("console", "")
 	beego.Router("/", &MainController{})
 	if beego.AppConfig.String("imagepath") != imagePath {
