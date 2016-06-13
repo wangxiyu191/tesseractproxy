@@ -34,7 +34,10 @@ func (this *MainController) Post() {
 		log.Println(err)
 	}
 
-	out := gosseract.Must(gosseract.Params{Src: filePath + ".jpg"})
+	out := gosseract.Must(gosseract.Params{
+		Src:       filePath + ".jpg",
+		Languages: "eng",
+	})
 	out = strings.Replace(out, "\n", "", -1)
 	out = strings.Replace(out, "\r", "", -1)
 	out = strings.Replace(out, " ", "", -1)
